@@ -2,6 +2,14 @@ import { baseApi } from "./baseApi";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    createUser: builder.mutation({
+      query: (data) => ({
+        url: "/user/create",
+        method: "POST",
+        body: data,
+      }),
+    }),
+
     deleteUser: builder.mutation({
       query: (userId) => ({
         url: `/users/delete/${userId}`,
@@ -62,6 +70,7 @@ const userApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useCreateUserMutation,
   useDeleteUserMutation,
   useUserLoginMutation,
   useOtpVerificationMutation,
