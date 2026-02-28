@@ -32,7 +32,7 @@ const RegisterPage = () => {
       console.log(response);
       toast.success("Registration Successful");
       if (response?.data?.role === "ADMIN") {
-        router.push("/admin");
+        router.push("/admin/overview");
       } else {
         router.push("/cashier");
       }

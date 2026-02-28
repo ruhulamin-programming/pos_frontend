@@ -29,7 +29,7 @@ const LoginPage = () => {
       console.log(response);
       toast.success("Login Successful");
       if (response?.data?.role === "ADMIN") {
-        router.push("/admin");
+        router.push("/admin/overview");
       } else {
         router.push("/cashier");
       }
