@@ -18,7 +18,6 @@ const LoginPage = () => {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<IFormInput>();
 
   const [loginFunction, { isLoading }] = useUserLoginMutation();
@@ -28,7 +27,11 @@ const LoginPage = () => {
       const response = await loginFunction(data).unwrap();
       console.log(response);
       toast.success("Login Successful");
-      router.push("/admin");
+      if (response?.data?.role === "ADMIN") {
+        router.push("/admin");
+      } else {
+        router.push("/cashier");
+      }
       Cookies.set("accessToken", response?.data?.accessToken);
     } catch (error: any) {
       toast.error(error?.data?.message || "Login Failed");

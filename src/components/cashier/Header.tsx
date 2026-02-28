@@ -26,7 +26,7 @@ const Header = () => {
           </div>
 
           <Link
-            href="/admin/profile"
+            href="/cashier/profile"
             className="relative h-10 w-10 overflow-hidden rounded-full ring-2 ring-purple-100 transition-all hover:ring-purple-200"
           >
             {data?.result?.profileImage ? (
