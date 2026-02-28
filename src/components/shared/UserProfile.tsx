@@ -14,7 +14,7 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 interface UserFormValue {
   fullName: string;
@@ -63,10 +63,8 @@ const UserProfile = () => {
   const onSubmit = async (data: UserFormValue) => {
     try {
       const response = await updateUser({ data, userId }).unwrap();
-      if (response.success) {
-        toast.success(response.message || "Profile updated successfully!");
-        setIsEditing(false);
-      }
+      toast.success(response.message || "Profile updated successfully!");
+      setIsEditing(false);
     } catch (error: any) {
       toast.error(error?.data?.message || "Failed to update profile");
     }
@@ -85,9 +83,6 @@ const UserProfile = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 animate-in fade-in duration-500">
-      <ToastContainer />
-
-      {/* Header Actions */}
       <div className="flex items-center justify-between">
         <button
           onClick={() => router.back()}
@@ -111,7 +106,6 @@ const UserProfile = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column: Avatar & Summary */}
         <div className="lg:col-span-1 space-y-6">
           <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/20 p-8 text-center relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-24 bg-linear-to-br from-indigo-500 to-purple-600 opacity-10"></div>
@@ -144,9 +138,9 @@ const UserProfile = () => {
             <div className="mt-8 pt-8 border-t border-gray-50 grid grid-cols-2 gap-4 text-left">
               <div className="space-y-1">
                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                  Type
+                  Role
                 </p>
-                <p className="text-xs font-bold text-gray-700">Customer</p>
+                <p className="text-xs font-bold text-gray-700">{user?.role}</p>
               </div>
               <div className="space-y-1">
                 <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">
@@ -158,7 +152,6 @@ const UserProfile = () => {
           </div>
         </div>
 
-        {/* Right Column: Information & Form */}
         <div className="lg:col-span-2">
           <div className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/20 overflow-hidden h-full">
             <div className="px-8 py-6 border-b border-gray-50 bg-gray-50/30 flex items-center justify-between">
@@ -219,6 +212,7 @@ const UserProfile = () => {
                         required: "Email is required",
                       })}
                       error={errors.email}
+                      disabled={true}
                     />
                     <InputField
                       label="Phone Number"
@@ -274,14 +268,17 @@ const DetailItem = ({ icon, label, value, isFullWidth = false }: any) => (
   </div>
 );
 
-const InputField = ({ label, register, error }: any) => (
+const InputField = ({ label, register, error, disabled }: any) => (
   <div className="space-y-1.5">
     <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">
       {label}
     </label>
     <input
       {...register}
+      disabled={disabled}
       className={`w-full px-4 py-3.5 rounded-2xl bg-gray-50 border transition-all text-sm font-bold focus:ring-4 focus:ring-indigo-500/10 focus:bg-white outline-none ${
+        disabled ? "opacity-50 cursor-not-allowed" : ""
+      } ${
         error
           ? "border-rose-300 focus:border-rose-500"
           : "border-gray-200 focus:border-indigo-500"

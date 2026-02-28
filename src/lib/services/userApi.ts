@@ -20,7 +20,7 @@ const userApi = baseApi.injectEndpoints({
 
     profileUpdate: builder.mutation({
       query: (data) => ({
-        url: "/auth/profile",
+        url: "/user/my-profile",
         method: "PATCH",
         body: data,
       }),
@@ -36,7 +36,7 @@ const userApi = baseApi.injectEndpoints({
     }),
 
     myProfile: builder.query({
-      query: () => "/auth/profile",
+      query: () => "/user/my-profile",
       providesTags: ["profile"],
     }),
 
@@ -52,8 +52,8 @@ const userApi = baseApi.injectEndpoints({
 
     updateUser: builder.mutation({
       query: ({ data, userId }) => ({
-        url: `/users/${userId}`,
-        method: "PUT",
+        url: `/user/update/${userId}`,
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: ["users"],

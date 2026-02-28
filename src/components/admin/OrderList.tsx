@@ -1,7 +1,8 @@
+import { useLatestOrdersQuery } from "@/lib/services/orderApi";
 import Image from "next/image";
-import React from "react";
 
 const OrderList = () => {
+  const { data: latestOrders, isLoading } = useLatestOrdersQuery({});
   const orderListData = [
     {
       id: "12345",
@@ -56,30 +57,32 @@ const OrderList = () => {
 
   return (
     <div className="px-6 py-2">
-      {orderListData.map((order, idx) => (
+      {latestOrders?.data.map((order: any, idx: number) => (
         <div
-          className={`flex justify-between items-center py-4 ${idx !== orderListData.length - 1 ? "border-b border-gray-50" : ""}`}
-          key={order.id + idx}
+          className={`flex justify-between items-center py-4 ${idx !== latestOrders?.data?.length - 1 ? "border-b border-gray-50" : ""}`}
+          key={order?.id + idx}
         >
           <div className="flex items-center gap-4">
             <div className="relative h-12 w-12 rounded-xl overflow-hidden bg-gray-100 border border-gray-200">
               <Image
                 className="object-cover"
-                alt={order.productName}
-                src={order.productImage}
+                alt={order?.product?.productName}
+                src={order?.product?.productImage}
                 fill
               />
             </div>
             <div>
               <p className="font-semibold text-gray-900 text-sm">
-                {order.productName}
+                {order?.product?.productName}
               </p>
               <div className="flex items-center gap-2 mt-0.5">
                 <span className="text-xs text-gray-500">
-                  {order.serving} serving
+                  {order.quantity} serving
                 </span>
                 <span className="text-[10px] text-gray-300">•</span>
-                <span className="text-xs text-gray-400">{order.time}</span>
+                <span className="text-xs text-gray-400">
+                  {new Date(order?.createdAt).toLocaleString()}
+                </span>
               </div>
             </div>
           </div>

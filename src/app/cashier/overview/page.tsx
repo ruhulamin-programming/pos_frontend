@@ -1,6 +1,6 @@
 "use client";
 
-import CustomerTable from "@/components/admin/CustomerTable";
+import CustomerTable from "@/components/admin/CashierTable";
 import OrderList from "@/components/admin/OrderList";
 import { CircleDollarSign, ListOrdered, ShoppingCart } from "lucide-react";
 
