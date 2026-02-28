@@ -4,7 +4,8 @@ import Cookies from "js-cookie";
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3002/api/v1",
+    // baseUrl: "http://localhost:3002/api/v1",
+    baseUrl: "https://pos-server-7ga3.onrender.com/api/v1",
     prepareHeaders: (headers) => {
       const accessToken = Cookies?.get("accessToken");
       if (accessToken) {
