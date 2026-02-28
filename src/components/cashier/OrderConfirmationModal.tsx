@@ -3,9 +3,9 @@
 import { usePlaceOrderMutation } from "@/lib/services/orderApi";
 import { clearCart } from "@/lib/features/cashierSlice";
 import { useDispatch } from "react-redux";
-import { toast } from "react-hot-toast";
 import { Loader2, Printer, X, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 interface OrderConfirmationModalProps {
   isOpen: boolean;
