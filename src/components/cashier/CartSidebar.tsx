@@ -48,13 +48,13 @@ const CartSidebar = ({ cart, totalPrice }: CartSidebarProps) => {
         <div className="flex-1 overflow-y-auto p-3 space-y-3 custom-scrollbar">
           {cart.map((item) => (
             <div
-              key={item.id}
+              key={item?.id}
               className="flex gap-2 p-2 rounded-2xl border border-gray-50 hover:bg-gray-50/50 transition-colors group"
             >
               <div className="h-10 w-10 relative rounded-xl overflow-hidden bg-gray-100 shrink-0">
                 <Image
-                  src={item.productImage || "/placeholder-product.png"}
-                  alt={item.productName}
+                  src={item?.productImage || "/placeholder-product.png"}
+                  alt={item?.productName || "Product"}
                   fill
                   className="object-cover"
                 />
@@ -62,23 +62,23 @@ const CartSidebar = ({ cart, totalPrice }: CartSidebarProps) => {
               <div className="flex-1 min-w-0 flex flex-col justify-between py-0.5">
                 <div className="flex justify-between items-start gap-1">
                   <h4 className="font-bold text-gray-900 text-[10px] truncate uppercase tracking-tight">
-                    {item.productName}
+                    {item?.productName}
                   </h4>
                   <span className="font-black text-purple-600 text-[10px] whitespace-nowrap">
-                    {formatPrice(item.price * item.quantity)}
+                    {formatPrice(item?.price * item?.quantity)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
                   <p className="text-[8px] font-bold text-gray-400">
-                    {item.quantity} x {formatPrice(item.price)}
+                    {item?.quantity} x {formatPrice(item?.price)}
                   </p>
                   <div className="flex items-center gap-1 bg-white rounded-md border border-gray-100 p-0.5 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                       onClick={() =>
                         dispatch(
                           updateCartItemQuantity({
-                            id: item.id,
-                            quantity: item.quantity - 1,
+                            id: item?.id,
+                            quantity: item?.quantity - 1,
                           }),
                         )
                       }
@@ -90,8 +90,8 @@ const CartSidebar = ({ cart, totalPrice }: CartSidebarProps) => {
                       onClick={() =>
                         dispatch(
                           updateCartItemQuantity({
-                            id: item.id,
-                            quantity: item.quantity + 1,
+                            id: item?.id,
+                            quantity: item?.quantity + 1,
                           }),
                         )
                       }
