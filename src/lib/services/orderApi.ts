@@ -2,6 +2,15 @@ import { baseApi } from "./baseApi";
 
 const orderApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    placeOrder: builder.mutation({
+      query: (orderData) => ({
+        url: `/order/place-order`,
+        method: "POST",
+        body: orderData,
+      }),
+      invalidatesTags: ["orders"],
+    }),
+
     getOrders: builder.query({
       query: ({ page, limit, menu }) => ({
         url: `/order/all-orders?page=${page}&limit=${limit}${menu ? `&menu=${menu}` : ""}`,
@@ -28,5 +37,9 @@ const orderApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetOrdersQuery, useLatestOrdersQuery, useSellsSummaryQuery } =
-  orderApi;
+export const {
+  usePlaceOrderMutation,
+  useGetOrdersQuery,
+  useLatestOrdersQuery,
+  useSellsSummaryQuery,
+} = orderApi;
