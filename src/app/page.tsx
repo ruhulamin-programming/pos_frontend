@@ -28,12 +28,20 @@ const LoginPage = () => {
       const response = await loginFunction(data).unwrap();
       console.log(response);
       toast.success("Login Successful");
+
+      // Set cookie first
+      Cookies.set("accessToken", response?.data?.accessToken, {
+        expires: 7, // 7 days
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+      });
+
+      // Redirect after setting cookie
       if (response?.data?.role === "ADMIN") {
         router.push("/admin/overview");
       } else {
         router.push("/cashier");
       }
-      Cookies.set("accessToken", response?.data?.accessToken);
     } catch (error: any) {
       toast.error(error?.data?.message || "Login Failed");
     }
