@@ -10,6 +10,7 @@ A modern Point of Sale (POS) system built with [Next.js](https://nextjs.org), [R
 
 ## Live Demo
 
+- **Frontend App**: [https://pos-frontend-kohl.vercel.app/](https://pos-frontend-kohl.vercel.app/)
 - **Backend API**: [https://pos-server-7ga3.onrender.com/api/v1](https://pos-server-7ga3.onrender.com/api/v1)
 
 ### Test Credentials
